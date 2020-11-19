@@ -84,4 +84,9 @@ public class ContractsImplFaker implements Contracts {
       // FIXME: Don't allow duplicated !!
         this.theNews.add(news);
     }
+
+    @Override
+    public int getListSize() {
+        return theNews.size();
+    }
 }

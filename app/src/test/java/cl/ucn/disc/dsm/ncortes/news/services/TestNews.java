@@ -10,16 +10,40 @@
 
 package cl.ucn.disc.dsm.ncortes.news.services;
 
+import com.github.javafaker.Faker;
+
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
+
+import cl.ucn.disc.dsm.ncortes.news.model.News;
+
 /**
  * @author Nector Cortés Rojas
  */
 public final class TestNews {
 
+    private static final Logger log = LoggerFactory.getLogger(News.class);
+
     /**
-     *
+     * The test of News
      */
 
+    @Test
     public void testConstructor() {
+        final Faker faker = Faker.instance();
 
+        News news = new News(
+                Integer.toUnsignedLong(1),
+                faker.book().title(),
+                faker.name().username(),
+                faker.name().fullName(),
+                faker.internet().url(),
+                faker.internet().avatar(),
+                faker.harryPotter().quote(),
+                faker.lorem().paragraph(3),
+                ZonedDateTime.now(ZoneId.of("-3")));
     }
 }

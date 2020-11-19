@@ -10,10 +10,14 @@
 
 package cl.ucn.disc.dsm.ncortes.news.services;
 
+import com.github.javafaker.Faker;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
 
 import java.util.List;
 
@@ -76,7 +80,23 @@ public class TestContractsImplFaker {
 
         // The concrete implementation
         Contracts contracts = new ContractsImplFaker();
+        final Faker faker = Faker.instance();
+        News newNews = new News(
+                Integer.toUnsignedLong(1),
+                faker.book().title(),
+                faker.name().username(),
+                faker.name().fullName(),
+                faker.internet().url(),
+                faker.internet().avatar(),
+                faker.harryPotter().quote(),
+                faker.lorem().paragraph(3),
+                ZonedDateTime.now(ZoneId.of("-3")));
 
+        System.out.println("Actual size: " +  contracts.getListSize());
+
+        contracts.saveNews(newNews);
+
+        System.out.println("Actual size: " +  contracts.getListSize());
     }
 
 }
