@@ -8,41 +8,42 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package cl.ucn.disc.dsm.ncortes.news.services;
-
-import com.github.javafaker.Faker;
-
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZonedDateTime;
-
-import cl.ucn.disc.dsm.ncortes.news.model.News;
+package cl.ucn.disc.dsm.ncortes.news.utils;
 
 /**
- * @author Nector Cortés Rojas
+ * The Validations.
+ *
+ * @author Nector Cortés Rojas.
  */
-public final class TestNews {
-
-    private static final Logger log = LoggerFactory.getLogger(News.class);
+public final class Validation {
 
     /**
-     * The test of News
+     * Check the size.
+     *
+     * @param value to check.
+     * @param minSize to check.
+     * @param message to throw in case of wrong size.
      */
+    public static void minSize(String value, int minSize, String message) {
 
-    @Test
-    public void testConstructor() {
-        final Faker faker = Faker.instance();
+        // Nullity
+        notNull(value,message);
 
-        News news = new News(
-                faker.book().title(),
-                faker.name().username(),
-                faker.name().fullName(),
-                faker.internet().url(),
-                faker.internet().avatar(),
-                faker.harryPotter().quote(),
-                faker.lorem().paragraph(3),
-                ZonedDateTime.now(ZoneId.of("-3")));
+        if(value.length() < minSize){
+            throw new IllegalArgumentException("Argument null or wrong size -> " + message);
+        }
+    }
+
+    /**
+     * Check nullity.
+     *
+     * @param value to check.
+     * @param message to throw in case of nullity.
+     */
+    public static void notNull(Object value, String message){
+        if(value == null){
+            throw new IllegalArgumentException("Argument was null -> " + message);
+        }
+
     }
 }

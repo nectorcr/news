@@ -19,9 +19,13 @@
 
 package cl.ucn.disc.dsm.ncortes.news;
 
+import android.os.Bundle;
+import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The main class.
@@ -29,15 +33,31 @@ import android.os.Bundle;
  * @Author Nector Cortés Rojas.
  */
 
-public class MainActivity extends AppCompatActivity {
+public final class MainActivity extends AppCompatActivity {
+
+    /**
+     * The Logger.
+     */
+    private static final Logger log = LoggerFactory.getLogger(MainActivity.class);
+
+    /**
+     * The ListView.
+     */
+    protected ListView listView;
 
     /**
      * OnCreate.
+     *
      * @param savedInstanceState used to reload the app.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        log.debug("onCreate ..");
         setContentView(R.layout.activity_main);
+
+        // Get the ListView from Layout
+        this.listView = findViewById(R.id.am_lv_news);
+        
     }
 }

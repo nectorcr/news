@@ -82,7 +82,6 @@ public class TestContractsImplFaker {
         Contracts contracts = new ContractsImplFaker();
         final Faker faker = Faker.instance();
         News newNews = new News(
-                Integer.toUnsignedLong(1),
                 faker.book().title(),
                 faker.name().username(),
                 faker.name().fullName(),
